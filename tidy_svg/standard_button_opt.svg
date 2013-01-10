@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg id="svg2" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="40" width="80" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <defs id="defs4">
+  <linearGradient id="linearGradient3862" y2="106.02" gradientUnits="userSpaceOnUse" x2="56.214" gradientTransform="translate(-6.0714 -68.929)" y1="75.309" x1="56.464">
+   <stop id="stop3858" stop-color="#a9a9a9" offset="0"/>
+   <stop id="stop3860" stop-color="#e0e0e0" offset="1"/>
+  </linearGradient>
+  <linearGradient id="linearGradient3878" y2="106.02" gradientUnits="userSpaceOnUse" x2="56.214" gradientTransform="translate(-6.0714 -68.929)" y1="75.309" x1="56.464">
+   <stop id="stop3874" stop-color="#cbcbcb" offset="0"/>
+   <stop id="stop3876" stop-color="#e2e2e1" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g id="layer2" transform="translate(-12.179 -1.9693)">
+  <rect id="rect3086" fill-rule="evenodd" ry="7.1429" height="30.893" width="71.25" stroke="url(#linearGradient3862)" y="6.6479" x="16.25" stroke-width="1px" fill="url(#linearGradient3878)"/>
+ </g>
+</svg>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <Shapes xmlns="http://www.evolus.vn/Namespace/Pencil"
+          xmlns:p="http://www.evolus.vn/Namespace/Pencil"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          id="Ubuntu_Phone_UI.Icons" 
+          displayName="Ubuntu Phone UI" 
+          description="Ubuntu Phone UI QML Components" 
+          author="John Vrbanac" 
+          url="http://www.verticalcue.com">
+    <Shape id="stdButton" displayName="Standard Button" icon="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAXCAYAAABNq8wJAAAB4ElEQVRYhe3Wv27aQBzAccaOeYWMfZVOVZ6ge5u5W7vlEbr0AQKDZWwBFgKMMLKxwXfYZ+M/GN/vQtdImdKF4dehEg5Jk6YKRIfUn/TZf1/dnXS12v+RcOr1+ltFUT4oinIuk0aj8U5V1ZNHF1dV9UTTtIFhGNeWZaFsTNPcaJpWNJvNz38M0HV94bouEkL+kf9Xvr8//X7/Rtf1LzvLt9vtj7Zt31JKUR7kUYZh8J3r1O12Z/P5HI+FbdubVqt1tg3o9Xo0CAI8Fp7nYafTOd8GmKZJGAvxKWEoj9lshoPB4NM2YDQakShiuE+MHY7v+zgcDquA8XhM4jjGhyLpRFGEhBC0LKsKcByHLBYLfLn4VQTBHB3HqQJc1yVJkqC8FjsYC3EymVSPeDqd0ixL8b40lRNjDD3PqwII8WmeZ/hasuxl4jhG3/ergCAI6HKZ47FI0wQppVVAGIa0KJZ4LLIsQ8ZY9YjjOKar1QqfVkgjzzOMoqg6gSRJXM5L5LzEstyn1UH8vkZp9RfK8/xrWa42ABwPhfPnKJ+lKJY/AKD6jQLAG855CsBRCJAaANwWRfGtdn+EEKdCABUCfl5dCZSREHBdluXlg+XvngQAvBdCfAcARSKX6/X6QghxenffXygZnXDd23vpAAAAAElFTkSuQmCC">
+      <Properties>
+        <PropertyGroup>
+          <Property name="box" type="Dimension">71.25,30</Property>
+        </PropertyGroup>
+        <PropertyGroup name="Text">
+          <Property name="label" displayName="Label" type="PlainText">Button</Property>
+          <Property name="textColor" displayName="Color" type="Color">#616061ff</Property>
+          <Property name="textFont" displayName="Font" type="Font">Ubuntu|normal|normal|14px</Property>
+        </PropertyGroup>
+      </Properties>
+      <Behaviors>
+        <For ref="button">
+          <Box>$box</Box>
+        </For>
+        <For ref="text">
+          <TextContent>$label</TextContent>
+          <Fill>$textColor</Fill>
+          <Font>$textFont</Font>
+          <BoxFit> 
+            <Arg>Bound.fromBox($box)</Arg>
+            <Arg>new Alignment(1, 1)</Arg>
+          </BoxFit>
+        </For>
+      </Behaviors>
+      <p:Content xmlns:p="http://www.evolus.vn/Namespace/Pencil" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="linearGradient3862" y2="106.02" gradientUnits="userSpaceOnUse" x2="56.214" gradientTransform="translate(-6.0714 -68.929)" y1="75.309" x1="56.464">
+           <stop id="stop3858" stop-color="#a9a9a9" offset="0"/>
+           <stop id="stop3860" stop-color="#e0e0e0" offset="1"/>
+          </linearGradient>
+          <linearGradient id="linearGradient3878" y2="106.02" gradientUnits="userSpaceOnUse" x2="56.214" gradientTransform="translate(-6.0714 -68.929)" y1="75.309" x1="56.464">
+           <stop id="stop3874" stop-color="#cbcbcb" offset="0"/>
+           <stop id="stop3876" stop-color="#e2e2e1" offset="1"/>
+          </linearGradient>
+        </defs>
+        <g id="layer2" transform="translate(-12.179 -1.9693)">
+          <rect id="button" fill-rule="evenodd" ry="7.1429" height="30" width="71.25" 
+            style="stroke:url(#linearGradient3862); fill:url(#linearGradient3878)" y="2.6479" x="12.25" stroke-width="1px"/>
+        </g>
+        <text id="text"/>
+      </p:Content>
+    </Shape>
+  </Shapes>
