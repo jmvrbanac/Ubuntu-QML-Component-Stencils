@@ -7,7 +7,63 @@
           description="Ubuntu Phone UI QML Components" 
           author="John Vrbanac" 
           url="http://www.verticalcue.com">
-    <Shape id="stdButton" displayName="Standard Button" icon="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAXCAYAAABNq8wJAAAB4ElEQVRYhe3Wv27aQBzAccaOeYWMfZVOVZ6ge5u5W7vlEbr0AQKDZWwBFgKMMLKxwXfYZ+M/GN/vQtdImdKF4dehEg5Jk6YKRIfUn/TZf1/dnXS12v+RcOr1+ltFUT4oinIuk0aj8U5V1ZNHF1dV9UTTtIFhGNeWZaFsTNPcaJpWNJvNz38M0HV94bouEkL+kf9Xvr8//X7/Rtf1LzvLt9vtj7Zt31JKUR7kUYZh8J3r1O12Z/P5HI+FbdubVqt1tg3o9Xo0CAI8Fp7nYafTOd8GmKZJGAvxKWEoj9lshoPB4NM2YDQakShiuE+MHY7v+zgcDquA8XhM4jjGhyLpRFGEhBC0LKsKcByHLBYLfLn4VQTBHB3HqQJc1yVJkqC8FjsYC3EymVSPeDqd0ixL8b40lRNjDD3PqwII8WmeZ/hasuxl4jhG3/ergCAI6HKZ47FI0wQppVVAGIa0KJZ4LLIsQ8ZY9YjjOKar1QqfVkgjzzOMoqg6gSRJXM5L5LzEstyn1UH8vkZp9RfK8/xrWa42ABwPhfPnKJ+lKJY/AKD6jQLAG855CsBRCJAaANwWRfGtdn+EEKdCABUCfl5dCZSREHBdluXlg+XvngQAvBdCfAcARSKX6/X6QghxenffXygZnXDd23vpAAAAAElFTkSuQmCC">
+    <Script>
+      <![CDATA[
+      function jsdump(str) {
+        Components.classes['@mozilla.org/consoleservice;1']
+                  .getService(Components.interfaces.nsIConsoleService)
+                  .logStringMessage(str);
+      }
+
+      function parseRGBA(str) {
+        var re = /rgba\((\d{1,3}), (\d{1,3}), (\d{1,3}), (\d{1,3})\)/;
+        var results = re.exec(str);
+
+        var rgba = {}
+        if (results !== undefined && results !== null) {
+          rgba.r = parseInt(results[1]);
+          rgba.g = parseInt(results[2]);
+          rgba.b = parseInt(results[3]);
+          rgba.a = parseInt(results[4]);
+        }
+        return rgba;
+      }
+
+      collection.lighten = function(originalStr, amount) {        
+        function increase(val, amount) {
+          return val + amount > 255 ? 255 : val + amount; 
+        }
+
+        res = parseRGBA(originalStr);
+
+        var r = increase(res.r, amount);
+        var g = increase(res.g, amount);
+        var b = increase(res.b, amount);
+        var a = res.a;
+
+        var lightColor = "rgba("+r+", "+g+", "+b+", "+a+")";
+        return Color.fromString(lightColor);
+      }
+      
+      //TODO: Violates the DRY principle... Clean up 
+      collection.darken = function(originalStr, amount) {        
+        function decrease(val, amount) {
+          return val - amount < 0 ? 0 : val - amount; 
+        }
+        
+        res = parseRGBA(originalStr);
+
+        var r = decrease(res.r, amount);
+        var g = decrease(res.g, amount);
+        var b = decrease(res.b, amount);
+        var a = res.a;
+        
+        var lightColor = "rgba("+r+", "+g+", "+b+", "+a+")";
+        return Color.fromString(lightColor);
+      }
+      ]]>
+    </Script>
+    <Shape id="stdButton" displayName="Standard Button" icon="icons/standard_button.png">
       <Properties>
         <PropertyGroup>
           <Property name="box" type="Dimension">71.25,30</Property>
@@ -41,6 +97,62 @@
           <linearGradient id="linearGradient3878" y2="106.02" gradientUnits="userSpaceOnUse" x2="56.214" gradientTransform="translate(-6.0714 -68.929)" y1="75.309" x1="56.464">
            <stop id="stop3874" stop-color="#cbcbcb" offset="0"/>
            <stop id="stop3876" stop-color="#e2e2e1" offset="1"/>
+          </linearGradient>
+        </defs>
+        <g id="layer2" transform="translate(-12.179 -1.9693)">
+          <rect id="button" fill-rule="evenodd" ry="7.1429" height="30" width="71.25" 
+            style="stroke:url(#linearGradient3862); fill:url(#linearGradient3878)" y="2.6479" x="12.25" stroke-width="1px"/>
+        </g>
+        <text id="text"/>
+      </p:Content>
+    </Shape>
+    <Shape id="colorButton" displayName="Colored Button" icon="icons/colored_button.png">
+      <Properties>
+        <PropertyGroup name="Button">
+          <Property name="box" type="Dimension">71.25,30</Property>
+          <Property name="fillTopColor" displayName="Fill Color" type="Color">#007C00</Property>
+        </PropertyGroup>
+        <PropertyGroup name="Text">
+          <Property name="label" displayName="Label" type="PlainText">Button</Property>
+          <Property name="textColor" displayName="Color" type="Color">#fafafaff</Property>
+          <Property name="textFont" displayName="Font" type="Font">Ubuntu|normal|normal|14px</Property>
+        </PropertyGroup>
+      </Properties>
+      <Behaviors>
+        <For ref="button">
+          <Box>$box</Box>
+        </For>
+        <For ref="topFill">
+            <StopColor>$fillTopColor</StopColor>
+        </For>
+        <For ref="bottomFill">
+            <StopColor>collection.lighten($fillTopColor.toRGBAString(), 50)</StopColor>
+        </For>
+        <For ref="topStroke">
+            <StopColor>collection.darken($fillTopColor.toRGBAString(), 50)</StopColor>
+        </For>
+        <For ref="bottomStroke">
+            <StopColor>collection.lighten($fillTopColor.toRGBAString(), 10)</StopColor>
+        </For>
+        <For ref="text">
+          <TextContent>$label</TextContent>
+          <Fill>$textColor</Fill>
+          <Font>$textFont</Font>
+          <BoxFit> 
+            <Arg>Bound.fromBox($box)</Arg>
+            <Arg>new Alignment(1, 1)</Arg>
+          </BoxFit>
+        </For>
+      </Behaviors>
+      <p:Content xmlns:p="http://www.evolus.vn/Namespace/Pencil" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="linearGradient3862" y2="106.02" gradientUnits="userSpaceOnUse" x2="56.214" gradientTransform="translate(-6.0714 -68.929)" y1="75.309" x1="56.464">
+           <stop id="topStroke" stop-color="#006500" offset="0"/>
+           <stop id="bottomStroke" stop-color="#009600" offset="1"/>
+          </linearGradient>
+          <linearGradient id="linearGradient3878" y2="106.02" gradientUnits="userSpaceOnUse" x2="56.214" gradientTransform="translate(-6.0714 -68.929)" y1="75.309" x1="56.464">
+           <stop id="topFill" stop-color="#007C00" offset="0"/>
+           <stop id="bottomFill" stop-color="#00A700" offset="1"/>
           </linearGradient>
         </defs>
         <g id="layer2" transform="translate(-12.179 -1.9693)">
